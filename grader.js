@@ -40,7 +40,6 @@ var assertFileExists = function(infile) {
 };
 
 var cheerioHtmlFile = function(htmlfile) {
-    console.log(htmlfile);
     var url = (/^http[s]?:\/\//).test(htmlfile);
 
     var load_from_url = function(path) {
@@ -50,7 +49,6 @@ var cheerioHtmlFile = function(htmlfile) {
             return result;
         });
     };
-    console.log("url " + url);
     return url ? setTimeout(load_from_url(htmlfile), 15000) : cheerio.load(fs.readFileSync(htmlfile));
 };
 
@@ -64,11 +62,9 @@ var checkHtmlFile = function(htmlfile, checksfile) {
 
     var load_from_url = function(path) {
         return rest.get(path).on('complete', function(result) {
-            console.log('Printing ' + result);
             return result;
         });
     };
-    console.log("url " + url);
 
     if (url) {
         rest.get(htmlfile).on('complete', function(result) {
